@@ -2,8 +2,12 @@
   "name": "crm-server",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "npm": "~1.0.25"
+  },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build:digitalocean": "npm install --production=false && npm run build && npm ci"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,7 +18,7 @@
     "express": "^4.18.2",
     "express-fileupload": "^1.4.2",
     "http-errors": "~1.6.3",
-    "jade": "^1.9.2",
+    "jade": "^0.31.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0",
     "morgan": "~1.9.1",
