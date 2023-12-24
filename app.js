@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors')
 const fileUpload = require('express-fileupload');
+const helmet = require('helmet');
 
 var indexRouter = require('./src/routes/index');
 
@@ -22,8 +23,21 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 
 app.use('/api/v1', indexRouter);
+
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: ["'self'"], // Barcha resurslar o'zi sayt manzilidan olinadi
+            scriptSrc: ["'self'"],  // Scriptlar o'zi sayt manzilidan olinadi
+            styleSrc: ["'self'"],   // Stiller o'zi sayt manzilidan olinadi
+            // Boshqa direktivalar ham "self" ni qo'shish orqali o'zgartiriladi
+            // Boshqa resurslarga ruxsat berish uchun "self" ni qo'shing
+        },
+    })
+);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
