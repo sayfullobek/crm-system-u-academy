@@ -4,8 +4,8 @@ const {lidTypesController} = require('../controller')
 
 router.get('/', lidTypesController.getAll)
 router.get('/:id', lidTypesController.getOne)
-router.post('/', verifyUsersToken, lidTypesController.create)
-router.put('/:id', verifyUsersToken, lidTypesController.edit)
-router.delete('/:id', verifyUsersToken, lidTypesController.delete)
+router.post('/', lidTypesController.create)
+router.put('/:id', lidTypesController.edit)
+router.delete('/:id', lidTypesController.delete)
 
 module.exports = router
